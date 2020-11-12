@@ -113,55 +113,89 @@ int main(void)
   B_LAZER_Xshut=0;
   SB_LAZER_Xshut=0;
   SF_LAZER_Xshut=0;
-  vl53l0x_init(&vl53l0x_dev0,0);
-  vl53l0x_init(&vl53l0x_dev1,1);
-  vl53l0x_init(&vl53l0x_dev2,2);
+  HAL_TIM_Base_Start_IT(&htim4);
+  HAL_TIM_Base_Start_IT(&htim3);
+  HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_2);
+  HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_3);
+  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_2);
+  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_3);
+  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_4);
+  B_LAZER_Xshut=0;
+  SB_LAZER_Xshut=0;
+  SF_LAZER_Xshut=0;
+//  vl53l0x_init(&vl53l0x_dev0,0);
+//  vl53l0x_init(&vl53l0x_dev1,1);
+//  vl53l0x_init(&vl53l0x_dev2,2);
+//  MOTER_MOVE(30000, 1000, 1000, 1000);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	 
 	  /***Ò£¿Ø°´¼ü¡¤***/
 	  switch(PS2_DataKey())
 	  {
 		  case PSB_SELECT: 
 			  printf("1");
 			  break;
-		  case PSB_L3: printf("2");
+		  case PSB_L3: 
 			  break;
-		  case PSB_R3: printf("3");
+		  case PSB_R3: 
+			  printf("3");
 			  break;
-		  case PSB_START: printf("4");
+		  case PSB_START: 
+			  printf("4");
 			  break;
-		  case PSB_PAD_UP: printf("5");
+		  case PSB_PAD_UP: 
+			  MOTER_MOVE(11000, 1000, 1000, 1000);
+			  printf("5");
 			  break;
-		  case PSB_PAD_RIGHT: printf("6");
+		  case PSB_PAD_RIGHT: 
+			  catch_fk();
+			  printf("6");
 			  break;
-		  case PSB_PAD_DOWN: printf("7");
+		  case PSB_PAD_DOWN: 
+			  MOTER_MOVE(-11000, 1000, 1000, 1000);
+			  printf("7");
 			  break;
-		  case PSB_PAD_LEFT: printf("8");
+		  case PSB_PAD_LEFT: 
+			  printf("8");
+			  release_fk();
 			  break;
-		  case PSB_L2: printf("9");
+		  case PSB_L2: 
+			  printf("9");
 			  catch_2();
 			  break;
-		  case PSB_R2: printf("10");
-			  release_1();
-			  break;
-		  case PSB_L1: printf("11");
-			  catch_1();
-			  break;
-		  case PSB_R1: printf("12");
+		  case PSB_R2:
+			  printf("10");
 			  release_2();
 			  break;
-		  case PSB_GREEN: printf("13");
+		  case PSB_L1: 
+			  printf("11");
+			  catch_1();
 			  break;
-		  case PSB_RED: printf("14");
+		  case PSB_R1: 
+			  printf("12");
+			  release_1();
 			  break;
-		  case PSB_BLUE: printf("15");
+		  case PSB_GREEN: 
+			  open_door();
+			  printf("13");
 			  break;
-		  case PSB_PINK: printf("16");
+		  case PSB_RED:
+//			  vl53l0x_general_start(&vl53l0x_dev2,Default_Mode);
+			  vl53l0x_general_start(&vl53l0x_dev1,Default_Mode);
+//		      vl53l0x_general_start(&vl53l0x_dev0,Default_Mode);
+			  break;
+		  case PSB_BLUE:
+			  close_door();
+			  printf("15");
+			  break;
+		  case PSB_PINK: 
+			  
 			  break;
 		  case 0: 
 			  POLE_RX=PS2_AnologData(PSS_RX);
@@ -200,10 +234,14 @@ int main(void)
 					move_Ncircle();
 					printf("×ó×ª");
 				}
+				else
+				{
+					stop();
+				}
 			  }
 			  break;
 		  }
-	  HAL_Delay(10);
+	  stepPosition=0;
 
 		  
 	  

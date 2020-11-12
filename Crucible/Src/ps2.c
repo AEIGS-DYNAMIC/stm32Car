@@ -101,6 +101,7 @@ uint8_t PS2_DataKey()
 		if((Handkey&(1<<(MASK[index]-1)))==0)
 		return index+1;
 	}
+	HAL_Delay(10);
 	return 0; 
 }	
 

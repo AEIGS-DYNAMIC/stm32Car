@@ -6,12 +6,12 @@
 
 #include "main.h"
 /*********¸Ä*********/
-#define L_PWM_CLOSE		1
-#define L_PWM_OPEN		1
-#define R_PWM_CLOSE		1
-#define R_PWM_OPEN		1
-#define D_PWM_CLOSE		1
-#define D_PWM_OPEN		1
+#define L_PWM_CLOSE		1200
+#define L_PWM_OPEN		700
+#define R_PWM_CLOSE		800
+#define R_PWM_OPEN		1300
+#define D_PWM_CLOSE		950
+#define D_PWM_OPEN		2000
 #define FL_PWM_CLOSE	1
 #define FL_PWM_OPEN		1
 #define FR_PWM_CLOSE	1

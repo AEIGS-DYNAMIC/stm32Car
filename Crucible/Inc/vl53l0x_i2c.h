@@ -9,18 +9,15 @@
 
 #include "sys.h"
 
+#define VL_SDA_IN()   {GPIOG->CRH&=0XFFFFFF0F;GPIOG->CRH|=(uint32_t)8<<4;}
+#define VL_SDA_OUT()  {GPIOG->CRH&=0XFFFFFF0F;GPIOG->CRH|=(uint32_t)3<<4;}
+#define VL_IIC_SCL    PGout(10)      //SCL
+#define VL_IIC_SDA    PGout(9) 	//SDA	 
+#define VL_READ_SDA   PGin(9) 		//输入SDA 
 
 
-//IO方向设置
-#define VL_SDA_IN()  {GPIOG->CRH&=0X0FFFFFFF;GPIOG->CRH|=(uint32_t)8<<28;}
-#define VL_SDA_OUT() {GPIOG->CRH&=0X0FFFFFFF;GPIOG->CRH|=(uint32_t)3<<28;}
 
-
-//IO操作函数	 
-#define VL_IIC_SCL    PBout(3)      //SCL
-#define VL_IIC_SDA    PGout(15) 	//SDA	 
-#define VL_READ_SDA   PGin(15) 		//输入SDA 
-
+  
 //状态
 #define STATUS_OK       0x00
 #define STATUS_FAIL     0x01

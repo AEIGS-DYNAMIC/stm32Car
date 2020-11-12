@@ -52,43 +52,31 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOG_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOF, LEFT_MOTOR_EN_Pin|LEFT_MOTOR_DIR_Pin|RIGHT_MOTOR_EN_Pin|RIGHT_MOTOR_DIR_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOF, CRL_CLK_Pin|CRL_CS_Pin|CRL_OUT_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, CRL_CLK_Pin|CRL_CS_Pin|CRL_OUT_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOE, RIGHT_MOTOR_EN_Pin|RIGHT_MOTOR_DIR_Pin|LEFT_MOTOR_EN_Pin|LEFT_MOTOR_DIR_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, RB_MOTOR_IN1_Pin|RB_MOTOR_IN2_Pin|RF_MOTOR_IN1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, LB_MOTOR_IN1_Pin|LB_MOTOR_IN2_Pin|LF_MOTOR_IN1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, RF_MOTOR_IN2_Pin|LB_MOTOR_IN1_Pin|LB_MOTOR_IN2_Pin|LF_MOTOR_IN1_Pin 
-                          |LF_MOTOR_IN2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, LF_MOTOR_IN2_Pin|RB_MOTOR_IN1_Pin|RB_MOTOR_IN2_Pin|RF_MOTOR_IN1_Pin 
+                          |RF_MOTOR_IN2_Pin|SF_LAZER_CLK_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOG, SF_LAZER_SC_Pin|SB_LAZER_SC_Pin|B_LAZER_SC_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOG, SB_LAZER_SDA_Pin|SB_LAZER_CLK_Pin|SF_LAZER_SDA_Pin|SF_LAZER_SC_Pin 
+                          |SB_LAZER_SC_Pin|B_LAZER_SC_Pin|LAZER_SDA_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LAZER_SDA_GPIO_Port, LAZER_SDA_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOB, B_LAZER_CLK_Pin|LED_Pin, GPIO_PIN_SET);
 
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LAZER_CLK_GPIO_Port, LAZER_CLK_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
-
-  /*Configure GPIO pins : PFPin PFPin PFPin PFPin */
-  GPIO_InitStruct.Pin = LEFT_MOTOR_EN_Pin|LEFT_MOTOR_DIR_Pin|RIGHT_MOTOR_EN_Pin|RIGHT_MOTOR_DIR_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : PEPin PEPin PEPin */
+  /*Configure GPIO pins : PFPin PFPin PFPin */
   GPIO_InitStruct.Pin = CRL_CLK_Pin|CRL_CS_Pin|CRL_OUT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PtPin */
   GPIO_InitStruct.Pin = CRL_IN_Pin;
@@ -96,31 +84,40 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(CRL_IN_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : PEPin PEPin PEPin PEPin */
+  GPIO_InitStruct.Pin = RIGHT_MOTOR_EN_Pin|RIGHT_MOTOR_DIR_Pin|LEFT_MOTOR_EN_Pin|LEFT_MOTOR_DIR_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
   /*Configure GPIO pins : PCPin PCPin PCPin */
-  GPIO_InitStruct.Pin = RB_MOTOR_IN1_Pin|RB_MOTOR_IN2_Pin|RF_MOTOR_IN1_Pin;
+  GPIO_InitStruct.Pin = LB_MOTOR_IN1_Pin|LB_MOTOR_IN2_Pin|LF_MOTOR_IN1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PDPin PDPin PDPin PDPin 
-                           PDPin */
-  GPIO_InitStruct.Pin = RF_MOTOR_IN2_Pin|LB_MOTOR_IN1_Pin|LB_MOTOR_IN2_Pin|LF_MOTOR_IN1_Pin 
-                          |LF_MOTOR_IN2_Pin;
+                           PDPin PDPin */
+  GPIO_InitStruct.Pin = LF_MOTOR_IN2_Pin|RB_MOTOR_IN1_Pin|RB_MOTOR_IN2_Pin|RF_MOTOR_IN1_Pin 
+                          |RF_MOTOR_IN2_Pin|SF_LAZER_CLK_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PGPin PGPin PGPin PGPin */
-  GPIO_InitStruct.Pin = SF_LAZER_SC_Pin|SB_LAZER_SC_Pin|B_LAZER_SC_Pin|LAZER_SDA_Pin;
+  /*Configure GPIO pins : PGPin PGPin PGPin PGPin 
+                           PGPin PGPin PGPin */
+  GPIO_InitStruct.Pin = SB_LAZER_SDA_Pin|SB_LAZER_CLK_Pin|SF_LAZER_SDA_Pin|SF_LAZER_SC_Pin 
+                          |SB_LAZER_SC_Pin|B_LAZER_SC_Pin|LAZER_SDA_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PBPin PBPin */
-  GPIO_InitStruct.Pin = LAZER_CLK_Pin|LED_Pin;
+  GPIO_InitStruct.Pin = B_LAZER_CLK_Pin|LED_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;

@@ -169,6 +169,9 @@ void MOTER_MOVE(int step, uint32_t accel, uint32_t decel, uint32_t speed)
 		}
 		srd.accel_count = 0;
 		status.running = TRUE;
+		TIM5->CCR1=5;
+		TIM5->CCR2=5;
+		TIM5->ARR=9;
 		HAL_TIM_Base_Start_IT(&htim5);
 		HAL_TIM_PWM_Start(&htim5,TIM_CHANNEL_4);
 	}

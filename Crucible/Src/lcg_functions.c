@@ -8,67 +8,51 @@
 #include "zbw_functions.h"
 
 
-
+//µÚÒ»´Î¼Ð³Ö
 void catch_1(void)
 {
-	// Ð£×¼º¯Êý
-	while(calibration_cube())
-	{
-		HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
-		HAL_Delay(10);
-	}
+// Ð£×¼º¯Êý
+//	while(calibration_cube())
+//	{
+//		HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+//		HAL_Delay(10);
+//	}
 	// ¶æ»úËÉ
 	release_fk();
-	// Ë¿¸ËµÍ
-	// ²½½øµç»úÓÉºÜ¸ßÏÂ½µµ½µÍë 10cm Ðè¼ÆËã
-	MOTER_MOVE(3000,3000,3000,3000);
-	// ¶æ»ú½ô
+	MOTER_MOVE(-44000, 1000, 1000, 1000);
+	HAL_Delay(3600);
 	catch_fk();
-	// Ë¿¸Ë  µÍ-->ºÜ¸ß
-		// CW
-	MOTER_MOVE(3000,3000,3000,3000);
+	MOTER_MOVE(44000, 1000, 1000, 1000);
 }
-
+//Ö®ºóµÄ¼Ð³Ö
 void catch_2(void)
 {
 	// Ð£×¼º¯Êý
-	while(calibration_cube())
-	{
-		HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
-		HAL_Delay(10);
-	}
-	// ¶æ»úËÉ
+//	while(calibration_cube())
+//	{
+//		HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+//		HAL_Delay(10);
+//	}
 	release_fk();
-	// Ë¿¸ËµÍ
-	// ²½½øµç»úÓÉºÜ¸ßÏÂ½µµ½µÍë 10cm Ðè¼ÆËã
-	MOTER_MOVE(3000,3000,3000,3000);
-	// ¶æ»ú½ô
+	HAL_Delay(1);
+	MOTER_MOVE(-44000,1000,1000,1000);
+	HAL_Delay(3500);
 	catch_fk();
-	// Ë¿¸Ë  µÍ-->ÖÐ
-	MOTER_MOVE(3000,3000,3000,3000);
+	MOTER_MOVE(11000, 1000, 1000, 1000);
 }
 
 void release_1(void)
 {
+	MOTER_MOVE(33000, 1000, 1000, 1000);
 	release_fk();
 	open_door();
-	
-	// ³µ×ÓÏòºóÒÆ¶¯
-	move_backward();
-	
-	close_door();
-	// Ë¿¸Ë ÖÐ-->ºÜ¸ß
-	MOTER_MOVE(3000,3000,3000,3000);
-	catch_fk();
 	
 }
 
 void release_2(void)
 {
+	MOTER_MOVE(-11000, 1000, 1000, 1000);
 	release_fk();
 	open_door();
-	move_backward();
-	close_door();
-	catch_fk();
 }
 

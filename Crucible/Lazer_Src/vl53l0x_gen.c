@@ -16,7 +16,6 @@ VL53L0X_Error vl53l0x_set_mode(VL53L0X_Dev_t *dev,u8 mode)
 	 uint32_t refSpadCount;
 	 uint8_t isApertureSpads;
 	
-	 vl53l0x_reset(dev);//复位vl53l0x(频繁切换工作模式容易导致采集距离数据不准，需加上这一代码)
 	 status = VL53L0X_StaticInit(dev);
 
      
@@ -92,8 +91,9 @@ uint16_t vl53l0x_general_start(VL53L0X_Dev_t *dev,u8 mode)
 	VL53L0X_Error Status=VL53L0X_ERROR_NONE;//工作状态
 
 	
+	vl53l0x_set_mode(dev,mode);
+
 	
-	vl53l0x_set_mode(dev,mode);//配置测量模式
 	
 	if(Status==VL53L0X_ERROR_NONE)
 	{
